@@ -25,7 +25,7 @@ namespace GoogleServiceAccount.Controllers
         [HttpGet(Name = "GoogleSerchConsole")]
         public ActionResult Get(string url)
         {
-            string siteUrl = "https://zenfoliosite.com/";
+            string siteUrl = "https://yoursite.com/";
             using (var stream =
               new FileStream("thinking-pagoda-447206-p8-5b2ac55ac4ca.json", FileMode.Open, FileAccess.Read))
             {
