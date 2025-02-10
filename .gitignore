@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/GoogleServiceAccount
+/GoogleServiceAccount/thinking-pagoda-447206-p8-5b2ac55ac4ca.json
