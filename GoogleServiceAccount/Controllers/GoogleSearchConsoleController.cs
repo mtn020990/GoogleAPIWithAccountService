@@ -12,22 +12,23 @@ namespace GoogleServiceAccount.Controllers
     [Route("[controller]")]
     public class GoogleSearchConsoleController : ControllerBase
     {
+        private static SearchConsoleService searchConsoleService;
         public GoogleSearchConsoleController()
         {
 
         }
 
         /// <summary>
-        /// Zenfolio URL e.g: https://your_domain.zenfoliosite.com
+        /// Zenfolio URL e.g: https://your_domain.com
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
         [HttpGet(Name = "GoogleSerchConsole")]
-        public ActionResult Get(string url)
+        public async Task<ActionResult> Get(string url)
         {
-            string siteUrl = "https://yoursite.com/";
+            string siteUrl = "sc-domain:yoursomain.com";
             using (var stream =
-              new FileStream("thinking-pagoda-447206-p8-5b2ac55ac4ca.json", FileMode.Open, FileAccess.Read))
+              new FileStream("thinking-pagoda-447206-p8-0b562cdd5548.json", FileMode.Open, FileAccess.Read))
             {
                 var credentials = GoogleCredential.FromStream(stream);
                 if (credentials.IsCreateScopedRequired)
@@ -39,12 +40,12 @@ namespace GoogleServiceAccount.Controllers
                     });
                 }
 
-                var service = new SearchConsoleService(new BaseClientService.Initializer()
+                searchConsoleService = new SearchConsoleService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credentials
                 });
 
-                //var response = service.UrlInspection.Index.Inspect(
+                //var response = searchConsoleService.UrlInspection.Index.Inspect(
                 //    new InspectUrlIndexRequest
                 //    {
                 //        SiteUrl = siteUrl,
@@ -52,9 +53,9 @@ namespace GoogleServiceAccount.Controllers
                 //    })
                 //    .Execute();
 
-                // var result = service.Sitemaps.List(siteUrl).Execute();
+                 var result = searchConsoleService.Sitemaps.List(siteUrl).Execute();
 
-                var sitemap = service.Sitemaps.Get(siteUrl, url).Execute();
+                // var sitemap = searchConsoleService.Sitemaps.Get(siteUrl, url).Execute();
             }
 
             return Ok();
